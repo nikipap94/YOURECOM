@@ -3,6 +3,8 @@ package  com.yourecom.ui.login;
 import android.app.Activity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -18,6 +20,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.yourecom.MainActivity;
 import com.yourecom.R;
 import com.yourecom.ui.login.LoginViewModel;
 import com.yourecom.ui.login.LoginViewModelFactory;
@@ -66,6 +69,12 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
+
+                    //Success to login, call main activity
+                    Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    LoginActivity.this.startActivity(myIntent);
+
+
                 }
                 setResult(Activity.RESULT_OK);
 
