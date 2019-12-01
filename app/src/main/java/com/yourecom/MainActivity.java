@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.yourecom.data.model.Course;
 import com.yourecom.data.model.Professor;
@@ -15,27 +16,53 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView simpleList;
-
-    ArrayList<Course> dataModels;
-//    private static CustomAdapter adapter;
+    CourseListAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_main_list, R.id.course_title, countryList);
-//        simpleList.setAdapter(arrayAdapter);
-
 
         // Construct the data source
         ArrayList<Course> list = getCourseList();
 
         // Create the adapter to convert the array to views
-        CourseListAdapter adapter = new CourseListAdapter(this, list);
+        adapter = new CourseListAdapter(this, list);
 
         // Attach the adapter to a ListView
         simpleList = findViewById(R.id.simpleListView);
         simpleList.setAdapter(adapter);
+
+        //
+
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                Toast.makeText(MainActivity.this, "Selected -> " + version[i], Toast.LENGTH_SHORT).show();
+//            }
+//        });
+        setSearchBar();
+
+
+    }
+
+    private void setSearchBar(){
+        SearchView searchView = findViewById(R.id.search_course);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return true;
+            }
+        });
 
     }
 

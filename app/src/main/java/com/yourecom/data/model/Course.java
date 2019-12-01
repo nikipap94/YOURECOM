@@ -37,4 +37,20 @@ public class Course {
     public void setProfessor(Professor professor) {
         this.professor = professor;
     }
+
+    public boolean contains(String s){
+        s = s.toLowerCase();
+        return (this.title != null && this.title.toLowerCase().contains(s)) ||
+                (this.acronym != null && this.acronym.toLowerCase().contains(s)) ||
+                (this.professor != null && this.professor.getName() != null && this.professor.getName().toLowerCase().contains(s));
+
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "title='" + title + '\'' +
+                ", acronym='" + acronym + '\'' +
+                '}';
+    }
 }
