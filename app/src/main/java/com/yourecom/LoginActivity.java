@@ -21,12 +21,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         name = (EditText) findViewById(R.id.edName);
         password = (EditText) findViewById(R.id.edPassword);
         info = (TextView) findViewById(R.id.textView);
         login = (Button) findViewById(R.id.btLogin);
         signup = (Button) findViewById(R.id.btSignUp);
+
+        System.out.println("Signup:::::");
+        System.out.println(signup);
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
