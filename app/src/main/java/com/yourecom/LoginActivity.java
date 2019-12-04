@@ -27,10 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         info = (TextView) findViewById(R.id.textView);
         login = (Button) findViewById(R.id.btLogin);
         signup = (Button) findViewById(R.id.btSignUp);
-
-        System.out.println("Signup:::::");
-        System.out.println(signup);
-
+        
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,7 +46,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
      private void validate(String username, String userpassword) {
-        if ((username.endsWith("@eurecom.fr")) && (userpassword.equals(this.password))) {
+        if ((username.endsWith("@eurecom.fr")) && (userpassword.equals(this.password.getText().toString()))) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
         } else{
