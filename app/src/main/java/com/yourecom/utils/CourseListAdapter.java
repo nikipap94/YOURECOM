@@ -2,15 +2,16 @@ package com.yourecom.utils;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
 import com.yourecom.R;
+import com.yourecom.TabActivity;
 import com.yourecom.data.model.Course;
 
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ public class CourseListAdapter extends ArrayAdapter<Course> {
     private ArrayList<Course> originalList = new ArrayList<Course>();
     private ArrayList<Course> filteredList = new ArrayList<Course>();
     private ItemFilter mFilter = new ItemFilter();
+    private Context context;
 
     public CourseListAdapter(Context context, ArrayList<Course> courses) {
         super(context, 0, courses);
+        this.context = context;
         this.originalList = courses;
         this.filteredList = courses;
 
@@ -41,9 +44,9 @@ public class CourseListAdapter extends ArrayAdapter<Course> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Course course = getItem(position);
+        final Course course = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -62,6 +65,19 @@ public class CourseListAdapter extends ArrayAdapter<Course> {
         professorName.setText(course.getProfessor().getName());
 
         // Return the completed view to render on screen
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, TabActivity.class);
+                intent.putExtra("course_title", course.getTitle());
+                intent.putExtra("course_acronym", course.getAcronym());
+                intent.putExtra("prof_name", course.getProfessor().getName());
+                context.startActivity(intent);
+            }
+        });
+
+
         return convertView;
     }
 
