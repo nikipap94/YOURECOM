@@ -4,7 +4,11 @@ package com.yourecom;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import com.google.android.material.tabs.TabLayout;
 import com.yourecom.utils.MyPagerAdapter;
 
@@ -17,6 +21,9 @@ public class CourseDescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_description);
+
+        setDescription();
+
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
@@ -40,6 +47,20 @@ public class CourseDescriptionActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(vp);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 //        tabLayout.setOnTabSelectedListener(this);
+    }
+
+    private void setDescription(){
+        Intent intent = getIntent();
+        String title = intent.getStringExtra("course_title");
+        String acr = intent.getStringExtra("course_acronym");
+        String prof = intent.getStringExtra("prof_name");
+
+        TextView titleTxtView = (TextView) findViewById(R.id.courseName);
+        TextView profTxtView = (TextView) findViewById(R.id.professorName);
+
+        titleTxtView.setText(acr + " - " + title);
+        profTxtView.setText(prof);
+
     }
 
     private void addPages() {
