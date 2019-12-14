@@ -20,30 +20,7 @@ public class SignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.signup);
-        username = (EditText) findViewById(R.id.edUsername);
-        email = (EditText) findViewById(R.id.edEmail);
-        password = (EditText) findViewById(R.id.edpassword);
-        password2 = (EditText) findViewById(R.id.edRepeat);
-        confirm = (Button) findViewById(R.id.Register);
-
-        confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (validate(username.getText().toString(), email.getText().toString(),
-                        password.getText().toString(), password2.getText().toString())) {
-
-                    Intent intent = new Intent(SignUp.this, MainActivity.class);
-                    startActivity(intent);
-
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Please enter the correct fields",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
+        setContentView(R.layout.activity_firebase_ui);
     }
 
     private boolean validate(String username, String email, String pasw1, String pasw2) {

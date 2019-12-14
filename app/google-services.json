@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "261423331400",
+    "firebase_url": "https://yourecom-58914.firebaseio.com",
+    "project_id": "yourecom-58914",
+    "storage_bucket": "yourecom-58914.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:261423331400:android:bafa206feea8d76f30007d",
+        "android_client_info": {
+          "package_name": "com.yourecom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "261423331400-4bb3940nllms4pl30kbqt2u10gf58psg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1E6WE2ht7PMWfntnf_ypSAQjm374QqQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "261423331400-4bb3940nllms4pl30kbqt2u10gf58psg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
