@@ -56,17 +56,19 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Course> getCourseList(){
         ArrayList<Course> result = new ArrayList<>();
-        Professor prof1 = new Professor("John Smith");
-        Professor prof2 = new Professor("Cathy Ammed");
+        Professor prof1 = new Professor("Benoit Huet");
+        Professor prof2 = new Professor("Maurizio Filippone");
+        Professor prof3 = new Professor("Raphael Troncy");
+        Professor prof4 = new Professor("Melek Önen");
 
 
         result.add(new Course("Machine Learning", "MALIS", prof1));
         result.add(new Course("Deep Learning", "Deep", prof1));
-        result.add(new Course("Speech", "Spe", prof1));
-        result.add(new Course("Web Semamtic", "WebSem", prof1));
-        result.add(new Course("System Security", "Sys", prof2));
-        result.add(new Course("Statistics", "Stat", prof2));
-        result.add(new Course("Statistic Inf", "SI", prof2));
+        result.add(new Course("Speech Recognition", "Speech", prof2));
+        result.add(new Course("Web Semantic", "WebSem", prof3));
+        result.add(new Course("Web System Interaction", "WebInt", prof3));
+        result.add(new Course("Statistics", "Stat", prof4));
+        result.add(new Course("Security for Big Data", "BigSec", prof4));
 
         return result;
     }
