@@ -10,8 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
 
-import com.yourecom.CourseDescriptionActivity;
 import com.yourecom.R;
+import com.yourecom.TabActivity;
 import com.yourecom.data.model.Course;
 
 import java.util.ArrayList;
@@ -69,8 +69,7 @@ public class CourseListAdapter extends ArrayAdapter<Course> {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, CourseDescriptionActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                Intent intent = new Intent(context, TabActivity.class);
                 intent.putExtra("course_title", course.getTitle());
                 intent.putExtra("course_acronym", course.getAcronym());
                 intent.putExtra("prof_name", course.getProfessor().getName());
