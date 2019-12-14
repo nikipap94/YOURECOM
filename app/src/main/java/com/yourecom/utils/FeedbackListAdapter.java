@@ -1,12 +1,14 @@
 package com.yourecom.utils;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,12 +56,15 @@ public class FeedbackListAdapter extends BaseAdapter {
 
         TextView author = (TextView) convertView.findViewById(R.id.author);
         TextView text = (TextView) convertView.findViewById(R.id.text);
+        RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
 
         final String nameStr = feedbacks.get(position).getAuthorName();
         final String textStr = feedbacks.get(position).getText();
+        final int rating = feedbacks.get(position).getRating();
 //
         author.setText(nameStr);
         text.setText(textStr);
+        ratingBar.setRating(rating);
 
 //        convertView.setOnClickListener(new View.OnClickListener() {
 //            @Override

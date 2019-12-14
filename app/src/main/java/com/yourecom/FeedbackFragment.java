@@ -52,11 +52,11 @@ public class FeedbackFragment extends Fragment {
         ArrayList<Feedback> feedbacks=new ArrayList<>();
 
         feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
+        feedbacks.add(new Feedback("Raphael", "I loved the course.", 5));
+        feedbacks.add(new Feedback("Raphael", "I loved the course.", 3));
+        feedbacks.add(new Feedback("Raphael", "I loved the course.", 2));
         feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
-        feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
-        feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
-        feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
-        feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
+        feedbacks.add(new Feedback("Raphael", "I loved the course.", 1));
         feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
         feedbacks.add(new Feedback("Raphael", "I loved the course.", 4));
 
