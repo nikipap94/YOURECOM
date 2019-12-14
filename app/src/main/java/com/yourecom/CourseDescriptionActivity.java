@@ -65,8 +65,8 @@ public class CourseDescriptionActivity extends AppCompatActivity {
 
     private void addPages() {
         MyPagerAdapter pagerAdapter=new MyPagerAdapter(this.getSupportFragmentManager());
-        pagerAdapter.addFragment(new FeedbackFragment());
-        pagerAdapter.addFragment(new FeedbackFragment());
+        pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.FEEDBACK));
+        pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.TIPS));
 
         //SET ADAPTER TO VP
         vp.setAdapter(pagerAdapter);
