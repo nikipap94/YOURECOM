@@ -2,10 +2,13 @@ package com.yourecom;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yourecom.data.model.Course;
 import com.yourecom.data.model.Professor;
 import com.yourecom.utils.CourseListAdapter;
@@ -33,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
         simpleList.setAdapter(adapter);
 
         setSearchBar();
+        setFloatingButton();
+    }
+
+    private void setFloatingButton(){
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddCourseActivity.class);
+                MainActivity.this.startActivityForResult(intent, 0);
+            }
+        });
     }
 
     private void setSearchBar(){
