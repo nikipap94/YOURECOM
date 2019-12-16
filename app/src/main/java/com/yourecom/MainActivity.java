@@ -2,12 +2,13 @@ package com.yourecom;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.yourecom.data.model.Course;
 import com.yourecom.data.model.Professor;
 import com.yourecom.utils.CourseListAdapter;
@@ -72,6 +73,18 @@ public class MainActivity extends AppCompatActivity {
         simpleList.setAdapter(adapter);
 
         setSearchBar();
+        setFloatingButton();
+    }
+
+    private void setFloatingButton(){
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, AddCourseActivity.class);
+                MainActivity.this.startActivityForResult(intent, 0);
+            }
+        });
     }
 
     public void checkCurrentUser() {
@@ -164,17 +177,19 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<Course> getCourseList(){
         ArrayList<Course> result = new ArrayList<>();
-        Professor prof1 = new Professor("John Smith");
-        Professor prof2 = new Professor("Cathy Ammed");
+        Professor prof1 = new Professor("Benoit Huet");
+        Professor prof2 = new Professor("Maurizio Filippone");
+        Professor prof3 = new Professor("Raphael Troncy");
+        Professor prof4 = new Professor("Melek Önen");
 
 
         result.add(new Course("Machine Learning", "MALIS", prof1));
         result.add(new Course("Deep Learning", "Deep", prof1));
-        result.add(new Course("Speech", "Spe", prof1));
-        result.add(new Course("Web Semamtic", "WebSem", prof1));
-        result.add(new Course("System Security", "Sys", prof2));
-        result.add(new Course("Statistics", "Stat", prof2));
-        result.add(new Course("Statistic Inf", "SI", prof2));
+        result.add(new Course("Speech Recognition", "Speech", prof2));
+        result.add(new Course("Web Semantic", "WebSem", prof3));
+        result.add(new Course("Web System Interaction", "WebInt", prof3));
+        result.add(new Course("Statistics", "Stat", prof4));
+        result.add(new Course("Security for Big Data", "BigSec", prof4));
 
         return result;
     }

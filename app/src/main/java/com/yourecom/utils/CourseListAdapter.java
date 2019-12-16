@@ -70,7 +70,6 @@ public class CourseListAdapter extends ArrayAdapter<Course> {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, CourseDescriptionActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("course_title", course.getTitle());
                 intent.putExtra("course_acronym", course.getAcronym());
                 intent.putExtra("prof_name", course.getProfessor().getName());
