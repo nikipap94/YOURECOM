@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 import androidx.annotation.NonNull;
 
@@ -18,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
 
 public class EmailPasswordActivity extends BaseActivity implements
@@ -88,9 +91,20 @@ public class EmailPasswordActivity extends BaseActivity implements
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            try{
+                                throw task.getException();
+                            } catch (FirebaseAuthWeakPasswordException ex ){
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(EmailPasswordActivity.this,
+                                        "The password has to be at least 6 characters long",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                            catch (Exception ex){
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
                             updateUI(null);
                         }
 
@@ -119,9 +133,15 @@ public class EmailPasswordActivity extends BaseActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                            Intent intent = new Intent(EmailPasswordActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            if(user.isEmailVerified()) {
+                                updateUI(user);
+                                Intent intent = new Intent(EmailPasswordActivity.this, MainActivity.class);
+                                startActivity(intent);
+                            }
+                            else{
+                                Toast.makeText(EmailPasswordActivity.this, "Please verify your email account first!",
+                                        Toast.LENGTH_LONG).show();
+                            }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -177,6 +197,18 @@ public class EmailPasswordActivity extends BaseActivity implements
                             Toast.makeText(EmailPasswordActivity.this,
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
+                            AlertDialog alertDialog = new AlertDialog.Builder(EmailPasswordActivity.this).create();
+                            alertDialog.setTitle("Verification email sent.");
+                            alertDialog.setMessage("Please check your mail inbox to verify your email and then login again.");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Logout",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            signOut();
+                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
                             Toast.makeText(EmailPasswordActivity.this,
