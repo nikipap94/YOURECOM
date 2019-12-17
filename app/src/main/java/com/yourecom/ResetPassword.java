@@ -31,18 +31,18 @@ public class ResetPassword extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 final String emailAddress = edt.getText().toString();
-
-                auth.sendPasswordResetEmail(emailAddress)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(ResetPassword.this,
-                                            "Verification email sent to " + emailAddress,
-                                            Toast.LENGTH_SHORT).show();
-                                    AlertDialog alertDialog = new AlertDialog.Builder(ResetPassword.this).create();
+                auth.sendPasswordResetEmail(emailAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(ResetPassword.this, "Verification email sent to "
+                                            + emailAddress,
+                                    Toast.LENGTH_SHORT).show();
+                                    AlertDialog alertDialog = new AlertDialog.Builder
+                                            (ResetPassword.this).create();
                                     alertDialog.setTitle("Verification email sent.");
-                                    alertDialog.setMessage("Please check your mail inbox to verify your email and then login again.");
+                                    alertDialog.setMessage("Please check your mail inbox " +
+                                            "to reset your password and then login again.");
                                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Logout",
                                             new DialogInterface.OnClickListener() {
                                                 public void onClick(DialogInterface dialog, int which) {
@@ -54,12 +54,15 @@ public class ResetPassword extends AppCompatActivity {
                                 }
                             }
                         });
+
             }
+
         });
     }
+
     private void signOut() {
         Intent intent = new Intent(ResetPassword.this, EmailPasswordActivity.class);
         startActivity(intent);
     }
-    }
+}
 
