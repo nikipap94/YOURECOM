@@ -54,6 +54,7 @@ public class EmailPasswordActivity extends BaseActivity implements
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
         findViewById(R.id.signOutButton).setOnClickListener(this);
         findViewById(R.id.verifyEmailButton).setOnClickListener(this);
+        findViewById(R.id.forgot_password).setOnClickListener(this);
 
         // [START initialize_auth]
         // Initialize Firebase Auth
@@ -279,6 +280,22 @@ public class EmailPasswordActivity extends BaseActivity implements
             signOut();
         } else if (i == R.id.verifyEmailButton) {
             sendEmailVerification();
+        }
+        else if (i == R.id.forgot_password) {
+            //FirebaseAuth auth = FirebaseAuth.getInstance();
+            //String emailAddress = "papagora@eurecom.fr";
+
+            //auth.sendPasswordResetEmail(emailAddress)
+                    //.addOnCompleteListener(new OnCompleteListener<Void>() {
+                        //@Override
+                        //public void onComplete(@NonNull Task<Void> task) {
+                            //if (task.isSuccessful()) {
+                                //Log.d(TAG, "Email sent.");
+                            //}
+                        //}
+                    //});
+            Intent intent = new Intent(EmailPasswordActivity.this, ResetPassword.class);
+            startActivity(intent);
         }
     }
 }

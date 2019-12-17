@@ -19,6 +19,7 @@
         <activity android:name=".SignUp" />
         <activity android:name=".FirebaseUIActivity"/>
         <activity android:name=".BaseActivity"/>
+        <activity android:name=".ResetPassword"/>
         <activity android:name=".EmailPasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
