@@ -52,8 +52,8 @@ public class EmailPasswordActivity extends BaseActivity implements
         // Buttons
         findViewById(R.id.emailSignInButton).setOnClickListener(this);
         findViewById(R.id.emailCreateAccountButton).setOnClickListener(this);
-        findViewById(R.id.signOutButton).setOnClickListener(this);
-        findViewById(R.id.verifyEmailButton).setOnClickListener(this);
+        //findViewById(R.id.signOutButton).setOnClickListener(this);
+        //findViewById(R.id.verifyEmailButton).setOnClickListener(this);
         findViewById(R.id.forgot_password).setOnClickListener(this);
 
         // [START initialize_auth]
@@ -254,18 +254,18 @@ public class EmailPasswordActivity extends BaseActivity implements
             mStatusTextView.setText("Verified");
             mDetailTextView.setText("UID");
 
-            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
-            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
-            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
+            //findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
+            //findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
+            //findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
 
             findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
         } else {
             mStatusTextView.setText("Signed out");
             mDetailTextView.setText(null);
 
-            findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
-            findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
-            findViewById(R.id.signedInButtons).setVisibility(View.GONE);
+            //findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
+            //findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
+            //findViewById(R.id.signedInButtons).setVisibility(View.GONE);
         }
     }
 

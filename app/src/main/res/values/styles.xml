@@ -6,6 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@drawable/gradient</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -56,6 +57,14 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">36sp</item>
     </style>
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/rateNormal</item>
+        <item name="colorControlActivated">@color/rateActive</item>
+    </style>
 
+    <style name="RatingBar.Small">
+        <item name="ratingBarStyle">?android:attr/ratingBarStyleSmall</item>
+
+    </style>
 
 </resources>
