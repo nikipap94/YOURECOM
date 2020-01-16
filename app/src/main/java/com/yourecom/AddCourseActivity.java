@@ -3,7 +3,6 @@ package com.yourecom;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,24 +10,34 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.yourecom.data.model.Course;
 import com.yourecom.data.model.Professor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class AddCourseActivity extends AppCompatActivity {
 
     private final String DEFAULT_PROFESSOR = "Select a professor";
     private final String OTHER_PROFESSOR= "Other";
+    private final String COUSRDB_NAME = "Other";
+
+    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private final DatabaseReference courseDB = firebaseDatabase.getReference(Course.DB_NAME);
+    private final DatabaseReference professorDB = firebaseDatabase.getReference(Professor.DB_NAME);
+
+    private Professor professorSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_add_course);
 
-        String course = getIntent().getStringExtra("course");
+//        String course = getIntent().getStringExtra("course");
 
-        ((TextView) findViewById(R.id.course_name)).setText(course);
+//        ((TextView) findViewById(R.id.course_name)).setText(course);
 
         setSpinner();
     }
@@ -44,8 +53,10 @@ public class AddCourseActivity extends AppCompatActivity {
                 EditText txtProf = (EditText) findViewById(R.id.prof_name);
                 if(parent.getSelectedItem().toString() == OTHER_PROFESSOR){
                     txtProf.setVisibility(View.VISIBLE);
+                    professorSelected = null;
                 }else{
                     txtProf.setVisibility(View.INVISIBLE);
+                    professorSelected = (Professor) parent.getSelectedItem();
                 }
             }
 
@@ -70,12 +81,59 @@ public class AddCourseActivity extends AppCompatActivity {
     }
 
 
-    public void onClickBtn(View v) {
-//        Intent intent = new Intent(this, MainActivity.class);
-//        setResult(Activity.RESULT_OK, intent);
+    public void save(View v) {
+        //text views
+        TextView courseNameText = ((TextView) findViewById(R.id.course_name));
+        TextView acrText = ((TextView) findViewById(R.id.course_acr));
+        TextView profText = (TextView) ((Spinner) findViewById(R.id.prof_options)).getSelectedView();
 
 
-        //Todo: Have to check if the professor is correct.
+        String courseTitle = courseNameText.getText().toString().trim();
+        String acr = acrText.getText().toString().trim();
+
+        Professor prof;
+        if(professorSelected == null){
+            //create professor
+            String prof_name = ((TextView) findViewById(R.id.prof_name)).getText().toString().trim();
+
+            if(prof_name.isEmpty()){
+                ((TextView) findViewById(R.id.prof_name)).setError("Professor name cannot be empty.");
+                return;
+            }
+
+            prof = new Professor(prof_name);
+            String prof_key = professorDB.push().getKey();
+            professorDB.child(prof_key).setValue(prof);
+            System.out.println("*****Prof key"+ prof_key);
+
+
+        }else{
+            prof = professorSelected;
+            if(prof.toString() == DEFAULT_PROFESSOR){
+                profText.setError("Please select a professor.");
+                return;
+            }
+
+        }
+
+        //validation
+        if(courseTitle.isEmpty()){
+            courseNameText.setError("Course name cannot be empty.");
+            return;
+        }
+
+        if(acr.isEmpty()){
+            acrText.setError("Acronym cannot be empty.");
+            return;
+        }
+
+
+        //adding the course
+        Course newCourse = new Course(courseTitle, acr, prof);
+        String course_key = courseDB.push().getKey();
+        courseDB.child(course_key ).setValue(newCourse);
+
+
         super.onBackPressed();
     }
 }

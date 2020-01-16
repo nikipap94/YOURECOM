@@ -3,6 +3,8 @@ package com.yourecom.data.model;
 public class Professor {
     private String name;
 
+    public static final String DB_NAME = "Professor";
+
     public Professor(String name) {
         this.name = name;
     }

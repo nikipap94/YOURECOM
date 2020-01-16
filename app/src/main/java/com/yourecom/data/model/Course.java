@@ -5,6 +5,7 @@ public class Course {
     private String acronym;
     private Professor professor;
 
+    public static final String DB_NAME = "Course";
 
 
     public Course(String title, String acronym, Professor professor) {

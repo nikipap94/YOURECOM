@@ -23,8 +23,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Course Name"
-            android:inputType="textPersonName"
-            android:text="Course Name" />
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/course_acr"
@@ -56,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:onClick="onClickBtn"
+            android:onClick="save"
             android:text="Submit" />
 
     </LinearLayout>
