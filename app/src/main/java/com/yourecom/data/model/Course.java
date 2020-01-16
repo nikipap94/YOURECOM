@@ -14,6 +14,9 @@ public class Course {
         this.professor = professor;
     }
 
+    public Course() {
+
+    }
 
     public String getTitle() {
         return title;

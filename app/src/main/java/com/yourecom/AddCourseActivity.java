@@ -21,7 +21,6 @@ public class AddCourseActivity extends AppCompatActivity {
 
     private final String DEFAULT_PROFESSOR = "Select a professor";
     private final String OTHER_PROFESSOR= "Other";
-    private final String COUSRDB_NAME = "Other";
 
     private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference courseDB = firebaseDatabase.getReference(Course.DB_NAME);
