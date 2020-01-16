@@ -42,7 +42,7 @@
             android:theme="@style/RatingBar"/>
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/feedback_txt"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:ems="10"
@@ -55,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
-            android:onClick="onClickBtn"
+            android:onClick="save"
             android:text="Submit" />
 
     </LinearLayout>

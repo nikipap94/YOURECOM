@@ -84,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
                 title.setText(titleText);
                 professorName.setText(course.getProfessor().getName());
 
+                //get the key
+                final String itemKey = getRef(position).getKey();
+
+
                 // Return the completed view to render on screen
                 convertView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -92,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("course_title", course.getTitle());
                         intent.putExtra("course_acronym", course.getAcronym());
                         intent.putExtra("prof_name", course.getProfessor().getName());
+                        intent.putExtra("course_key", itemKey);
                         context.startActivity(intent);
                     }
                 });

@@ -34,9 +34,9 @@ public class AddCourseActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_course);
 
-//        String course = getIntent().getStringExtra("course");
+//        String courseKey = getIntent().getStringExtra("courseKey");
 
-//        ((TextView) findViewById(R.id.course_name)).setText(course);
+//        ((TextView) findViewById(R.id.course_name)).setText(courseKey);
 
         setSpinner();
     }
@@ -127,7 +127,7 @@ public class AddCourseActivity extends AppCompatActivity {
         }
 
 
-        //adding the course
+        //adding the courseKey
         Course newCourse = new Course(courseTitle, acr, prof);
         String course_key = courseDB.push().getKey();
         courseDB.child(course_key ).setValue(newCourse);

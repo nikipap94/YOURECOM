@@ -18,6 +18,7 @@ public class CourseDescriptionActivity extends AppCompatActivity {
     ViewPager vp;
     TabLayout tabLayout;
     String course;
+    String courseKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +43,14 @@ public class CourseDescriptionActivity extends AppCompatActivity {
                     case 0:
                         // feedback tab is selected
                         intent = new Intent(CourseDescriptionActivity.this, AddFeedbackActivity.class);
-                        intent.putExtra("course", course);
+                        intent.putExtra("courseKey", courseKey);
+                        intent.putExtra("courseTitle", course);
                         CourseDescriptionActivity.this.startActivityForResult(intent, 0);
                         break;
                     case 1:
                         // tip tab is selected
                         intent = new Intent(CourseDescriptionActivity.this, AddTipsActivity.class);
-                        intent.putExtra("course", course);
+                        intent.putExtra("courseKey", course);
                         CourseDescriptionActivity.this.startActivityForResult(intent, 0);
                         break;
                 }
@@ -76,6 +78,8 @@ public class CourseDescriptionActivity extends AppCompatActivity {
         String prof = intent.getStringExtra("prof_name");
 
         this.course = acr + " " + title;
+
+        this.courseKey = intent.getStringExtra("course_key");
 
         TextView titleTxtView = (TextView) findViewById(R.id.courseName);
         TextView profTxtView = (TextView) findViewById(R.id.professorName);

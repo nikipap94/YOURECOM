@@ -4,6 +4,8 @@ public class Tip {
     String authorName;
     String text;
 
+    public static final String DB_NAME = "Tip";
+
     public Tip(String authorName, String text) {
         this.authorName = authorName;
         this.text = text;
