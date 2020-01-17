@@ -50,7 +50,8 @@ public class CourseDescriptionActivity extends AppCompatActivity {
                     case 1:
                         // tip tab is selected
                         intent = new Intent(CourseDescriptionActivity.this, AddTipsActivity.class);
-                        intent.putExtra("courseKey", course);
+                        intent.putExtra("courseKey", courseKey);
+                        intent.putExtra("courseTitle", course);
                         CourseDescriptionActivity.this.startActivityForResult(intent, 0);
                         break;
                 }

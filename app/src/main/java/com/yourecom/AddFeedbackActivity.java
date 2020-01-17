@@ -40,7 +40,13 @@ public class AddFeedbackActivity extends AppCompatActivity {
         TextView feedbackText = ((TextView) findViewById(R.id.feedback_txt));
         Integer rating = (int)((RatingBar) findViewById(R.id.rating_course)).getRating();
 
-        String author = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        String author = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(user != null){
+            author = user.getDisplayName();
+        }
+
+
 
         Feedback newFeedback = new Feedback(author, feedbackText.getText().toString().trim(), rating, this.courseKey);
 

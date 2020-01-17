@@ -32,7 +32,7 @@
 
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/tip_txt"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:ems="10"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:background="#00726C6C"
-            android:onClick="onClickBtn"
+            android:onClick="save"
             android:text="Submit"
             android:textColor="#000000" />
 
