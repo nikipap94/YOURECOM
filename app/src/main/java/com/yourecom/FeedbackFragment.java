@@ -31,14 +31,16 @@ public class FeedbackFragment extends Fragment {
     public static final int TIPS = 2;
 
     private int type;
+    private String courseId;
 
     private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference feedbackRef = firebaseDatabase.getReference(Feedback.DB_NAME);
     private final DatabaseReference tipRef = firebaseDatabase.getReference(Tip.DB_NAME);
 
-    public FeedbackFragment(int type) {
+    public FeedbackFragment(int type, String courseId) {
         super();
         this.type = type;
+        this.courseId = courseId;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class FeedbackFragment extends Fragment {
         return rootView;
     }
     public FirebaseListAdapter getFeedbackAdapter() {
-        Query query = feedbackRef.orderByKey();
+        Query query = feedbackRef.orderByChild("courseId").endAt(this.courseId, "courseId");
 
         FirebaseListOptions<Feedback> options = new FirebaseListOptions.Builder<Feedback>()
                 .setLayout(R.layout.fragment_feedback_list)
@@ -78,7 +80,7 @@ public class FeedbackFragment extends Fragment {
                 final String nameStr = feedback.getAuthorName();
                 final String textStr = feedback.getText();
                 final int rating = feedback.getRating();
-//
+
                 author.setText(nameStr);
                 text.setText(textStr);
                 ratingBar.setRating(rating);

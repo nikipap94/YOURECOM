@@ -7,10 +7,18 @@ import androidx.viewpager.widget.ViewPager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.yourecom.data.model.Course;
+import com.yourecom.data.model.Feedback;
 import com.yourecom.utils.MyPagerAdapter;
 
 public class CourseDescriptionActivity extends AppCompatActivity {
@@ -19,6 +27,11 @@ public class CourseDescriptionActivity extends AppCompatActivity {
     TabLayout tabLayout;
     String course;
     String courseKey;
+    RatingBar ratingBar;
+
+    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private final DatabaseReference courseRef = firebaseDatabase.getReference(Course.DB_NAME);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +39,11 @@ public class CourseDescriptionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_course_description);
 
         setDescription();
+        ratingBar = (RatingBar) findViewById(R.id.rating_course);
+        getCourseRating();
+
+
+
 
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -92,12 +110,32 @@ public class CourseDescriptionActivity extends AppCompatActivity {
 
     private void addPages() {
         MyPagerAdapter pagerAdapter=new MyPagerAdapter(this.getSupportFragmentManager());
-        pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.FEEDBACK));
-        pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.TIPS));
+        pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.FEEDBACK, this.courseKey));
+        pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.TIPS, this.courseKey));
 
         //SET ADAPTER TO VP
         vp.setAdapter(pagerAdapter);
 
     }
+
+    private void getCourseRating(){
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Course course = dataSnapshot.getValue(Course.class);
+                System.out.println("!!!!!!!! " + course.getAverageRating());
+                ratingBar.setRating(course.getAverageRating());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        courseRef.child(courseKey).addValueEventListener(listener);
+
+    }
+
+
 
 }

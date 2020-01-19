@@ -11,8 +11,12 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.yourecom.data.model.Course;
 import com.yourecom.data.model.Feedback;
 
 public class AddFeedbackActivity extends AppCompatActivity {
@@ -20,6 +24,7 @@ public class AddFeedbackActivity extends AppCompatActivity {
 
     private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     private final DatabaseReference feedbackRef = firebaseDatabase.getReference(Feedback.DB_NAME);
+    private final DatabaseReference courseRef = firebaseDatabase.getReference(Course.DB_NAME);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +39,28 @@ public class AddFeedbackActivity extends AppCompatActivity {
 
         Button btn = (Button) findViewById(R.id.btnSubmit);
 
+    }
+
+    public void updateCourseRating(final Integer ratingValue){
+        System.out.println("rating" + ratingValue);
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Course course = dataSnapshot.getValue(Course.class);
+                System.out.println("@@@@" + dataSnapshot.getKey());
+                System.out.println("@@@@" + course);
+                if(ratingValue != 0 ){
+                    courseRef.child(courseKey).child("ratingSum").setValue(course.getRatingSum() + ratingValue);
+                    courseRef.child(courseKey).child("ratingCount").setValue(course.getRatingCount() + 1);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        courseRef.child(courseKey).addListenerForSingleValueEvent(listener);
     }
 
     public void save(View v) {
@@ -54,11 +81,12 @@ public class AddFeedbackActivity extends AppCompatActivity {
             feedbackText.setError("Field required");
             return;
         }
-        System.out.println("%%%%%%%%%%%%%%%%%%");
-        System.out.println(newFeedback.getCourseId());
 
         String feedback_key = feedbackRef.push().getKey();
         feedbackRef.child(feedback_key).setValue(newFeedback);
+
+        //update course rating
+        updateCourseRating(newFeedback.getRating());
 
         super.onBackPressed();
     }

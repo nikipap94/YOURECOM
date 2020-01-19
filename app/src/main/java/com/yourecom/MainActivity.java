@@ -12,9 +12,12 @@ import android.widget.SearchView;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.firebase.ui.database.FirebaseListOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.yourecom.data.model.Course;
 import com.yourecom.utils.CourseListAdapter;
 
@@ -55,55 +58,42 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         context = this;
 
-        setFirebaseAdapter();
+        setAdapter();
         setSearchBar();
         setFloatingButton();
     }
 
-    private void setFirebaseAdapter(){
-
-        Query query = courseDB.orderByChild("acronym");
-
-        FirebaseListOptions<Course> options = new FirebaseListOptions.Builder<Course>()
-                .setLayout(R.layout.activity_main_list)
-                .setQuery(query, Course.class)
-                .setLifecycleOwner(this)
-                .build();
-
-        FirebaseListAdapter adapter = new FirebaseListAdapter<Course>(options) {
+    private void setAdapter(){
+        ValueEventListener listener = new ValueEventListener() {
             @Override
-            protected void populateView(View convertView, final Course course, int position) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+//                System.out.println("!!!!!!!! " + course.getAverageRating());
+                System.out.println(dataSnapshot.getValue());
+                //Loading data from firebase to the temporary listItem data
+                ArrayList<Course> data = new ArrayList<>();
+                for(DataSnapshot customList :  dataSnapshot.getChildren()){
+                    Course item = customList.getValue(Course.class);
+                    data.add(item);
+                }
+                System.out.println("!!!!");
+                System.out.println(data);
+                courses = new ArrayList<Course>();
+                courses.addAll(data);
+                adapter = new CourseListAdapter(MainActivity.this, courses);
+                adapter.notifyDataSetChanged();
+                simpleList = findViewById(R.id.simpleListView);
+                simpleList.setAdapter(adapter);
 
-                // Lookup view for data population
-                TextView title = (TextView) convertView.findViewById(R.id.course_title);
-                TextView professorName = (TextView) convertView.findViewById(R.id.prof_name);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
-                // Populate the data into the template view using the data object
-                String titleText = course.getAcronym() + " - "+course.getTitle();
-                title.setText(titleText);
-                professorName.setText(course.getProfessor().getName());
-
-                //get the key
-                final String itemKey = getRef(position).getKey();
-
-
-                // Return the completed view to render on screen
-                convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(context, CourseDescriptionActivity.class);
-                        intent.putExtra("course_title", course.getTitle());
-                        intent.putExtra("course_acronym", course.getAcronym());
-                        intent.putExtra("prof_name", course.getProfessor().getName());
-                        intent.putExtra("course_key", itemKey);
-                        context.startActivity(intent);
-                    }
-                });
             }
         };
-        simpleList = findViewById(R.id.simpleListView);
-        simpleList.setAdapter(adapter);
+        courseDB.orderByChild("acronym").addValueEventListener(listener);
+
+
     }
 
 
@@ -199,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+//                setFirebaseAdapter(s);
                 adapter.getFilter().filter(s);
                 return true;
             }

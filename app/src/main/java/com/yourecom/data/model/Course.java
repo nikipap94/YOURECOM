@@ -4,6 +4,9 @@ public class Course {
     private String title;
     private String acronym;
     private Professor professor;
+    private Integer ratingSum;
+    private Integer ratingCount;
+    private String tags;
 
     public static final String DB_NAME = "Course";
 
@@ -12,6 +15,7 @@ public class Course {
         this.title = title;
         this.acronym = acronym;
         this.professor = professor;
+        this.tags = generateTags();
     }
 
     public Course() {
@@ -40,6 +44,47 @@ public class Course {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    public Integer getRatingSum() {
+        if(ratingCount == null){
+            return 0;
+        }
+        return ratingSum;
+    }
+
+    public void setRatingSum(Integer ratingSum) {
+        this.ratingSum = ratingSum;
+    }
+
+    public Integer getRatingCount() {
+        if(ratingCount == null){
+            return 0;
+        }
+        return ratingCount;
+    }
+
+    public void setRatingCount(Integer ratingCount) {
+        this.ratingCount = ratingCount;
+    }
+
+    public float getAverageRating(){
+        if(getRatingCount() == 0){
+            return 0;
+        }
+        return ((float)getRatingSum() / (float)getRatingCount());
+    }
+
+    public String generateTags(){
+        return this.getAcronym() + " " + this.getTitle() + " " + this.getProfessor().getName();
     }
 
     public boolean contains(String s){
