@@ -7,6 +7,7 @@ public class Course {
     private Integer ratingSum;
     private Integer ratingCount;
     private String tags;
+    private String key;
 
     public static final String DB_NAME = "Course";
 
@@ -52,6 +53,14 @@ public class Course {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Integer getRatingSum() {

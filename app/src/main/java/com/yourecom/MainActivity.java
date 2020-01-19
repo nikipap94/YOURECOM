@@ -67,16 +67,12 @@ public class MainActivity extends AppCompatActivity {
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                System.out.println("!!!!!!!! " + course.getAverageRating());
-                System.out.println(dataSnapshot.getValue());
-                //Loading data from firebase to the temporary listItem data
                 ArrayList<Course> data = new ArrayList<>();
                 for(DataSnapshot customList :  dataSnapshot.getChildren()){
                     Course item = customList.getValue(Course.class);
+                    item.setKey(customList.getKey());
                     data.add(item);
                 }
-                System.out.println("!!!!");
-                System.out.println(data);
                 courses = new ArrayList<Course>();
                 courses.addAll(data);
                 adapter = new CourseListAdapter(MainActivity.this, courses);

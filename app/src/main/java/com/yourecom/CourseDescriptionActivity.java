@@ -123,7 +123,6 @@ public class CourseDescriptionActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Course course = dataSnapshot.getValue(Course.class);
-                System.out.println("!!!!!!!! " + course.getAverageRating());
                 ratingBar.setRating(course.getAverageRating());
             }
 

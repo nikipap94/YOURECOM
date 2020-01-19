@@ -72,6 +72,7 @@ public class CourseListAdapter extends ArrayAdapter<Course> {
                 Intent intent = new Intent(context, CourseDescriptionActivity.class);
                 intent.putExtra("course_title", course.getTitle());
                 intent.putExtra("course_acronym", course.getAcronym());
+                intent.putExtra("course_key",course.getKey());
                 intent.putExtra("prof_name", course.getProfessor().getName());
                 context.startActivity(intent);
             }

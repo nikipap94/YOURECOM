@@ -67,7 +67,7 @@ public class FeedbackListAdapter extends BaseAdapter {
                 ratingBar.setRating(rating);
             }
         };
-        
+
     }
 
     @Override

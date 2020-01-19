@@ -10,8 +10,11 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.yourecom.data.model.Course;
 import com.yourecom.data.model.Professor;
 
@@ -67,14 +70,37 @@ public class AddCourseActivity extends AppCompatActivity {
     }
 
     private ArrayList<Professor> getProfessors(){
-        ArrayList<Professor> professors=new ArrayList<>();
+        final ArrayList<Professor> professors=new ArrayList<>();
 
         professors.add(new Professor(DEFAULT_PROFESSOR));
-        professors.add(new Professor("Raphael Troncy"));
-        professors.add(new Professor("Melek Owen"));
-        professors.add(new Professor("Maurizio Filipone"));
+//        professors.add(new Professor("Raphael Troncy"));
+//        professors.add(new Professor("Melek Owen"));
+//        professors.add(new Professor("Maurizio Filipone"));
 
-        professors.add(new Professor("Other"));
+
+        ValueEventListener listener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Professor professor = dataSnapshot.getValue(Professor.class);
+
+                for(DataSnapshot customList :  dataSnapshot.getChildren()){
+                    Professor item = customList.getValue(Professor.class);
+                    professors.add(item);
+                }
+
+                //to be able to add another professor
+                professors.add(new Professor("Other"));
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        professorDB.orderByChild("name").addListenerForSingleValueEvent(listener);
+
+
         return professors;
 
     }
