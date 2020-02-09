@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".AddFeedbackActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-
-
         android:padding="@dimen/default_margin">
 
         <TextView
@@ -45,19 +44,21 @@
             android:id="@+id/feedback_txt"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            style="@style/FullWidthEdit"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="Write your feedback "
             android:inputType="textMultiLine" />
-
+<!--        style="@style/Widget.AppCompat.Button.Colored"-->
         <Button
             android:id="@+id/btnSubmit"
-            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="@drawable/custom_bttn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:onClick="save"
-            android:text="Submit" />
+            android:text="Write Feedback" />
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

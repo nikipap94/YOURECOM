@@ -9,17 +9,29 @@
         android:roundIcon="@mipmap/yourecom_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddFeedbackActivity"></activity>
+        <activity android:name=".AddFeedbackActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseDescriptionActivity" />
+        </activity>
         <activity android:name=".activity_main_list" />
         <activity android:name=".AddCourseActivity" />
         <activity android:name=".AddTipsActivity" />
-        <activity android:name=".FeedbackActivity" />
-        <activity android:name=".CourseDescriptionActivity" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".FeedbackActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CourseDescriptionActivity" />
+        </activity>
+        <activity android:name=".CourseDescriptionActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SignUp" />
-        <activity android:name=".FirebaseUIActivity"/>
-        <activity android:name=".BaseActivity"/>
-        <activity android:name=".ResetPassword"/>
+        <activity android:name=".FirebaseUIActivity" />
+        <activity android:name=".BaseActivity" />
+        <activity android:name=".ResetPassword" />
         <activity android:name=".EmailPasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

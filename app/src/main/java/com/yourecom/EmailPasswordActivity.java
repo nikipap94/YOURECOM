@@ -23,21 +23,21 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.yourecom.utils.LoginManager;
 
 
 public class EmailPasswordActivity extends BaseActivity implements
         View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
-
+    // [END declare_auth]
+    LoginManager loginManager;
     private TextView mStatusTextView;
     private TextView mDetailTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
-
     // [START declare_auth]
     private FirebaseAuth mAuth;
-    // [END declare_auth]
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,12 @@ public class EmailPasswordActivity extends BaseActivity implements
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
+
+        loginManager = new LoginManager(this);
+        if (loginManager.isLogin()) {
+            Intent intent = new Intent(EmailPasswordActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
     // [START on_start_check_user]
@@ -95,21 +101,19 @@ public class EmailPasswordActivity extends BaseActivity implements
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-                            try{
+                            try {
                                 throw task.getException();
-                            } catch (FirebaseAuthWeakPasswordException ex ){
+                            } catch (FirebaseAuthWeakPasswordException ex) {
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(EmailPasswordActivity.this,
                                         "The password has to be at least 6 characters long",
                                         Toast.LENGTH_LONG).show();
-                            }
-                            catch (FirebaseAuthUserCollisionException ex) {
+                            } catch (FirebaseAuthUserCollisionException ex) {
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(EmailPasswordActivity.this,
                                         "This user already exists! Login instead!",
                                         Toast.LENGTH_LONG).show();
-                            }
-                            catch (Exception ex){
+                            } catch (Exception ex) {
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
                                 Toast.makeText(EmailPasswordActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
@@ -143,12 +147,12 @@ public class EmailPasswordActivity extends BaseActivity implements
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            if(user.isEmailVerified()) {
+                            if (user.isEmailVerified()) {
                                 updateUI(user);
+
                                 Intent intent = new Intent(EmailPasswordActivity.this, MainActivity.class);
                                 startActivity(intent);
-                            }
-                            else{
+                            } else {
                                 Toast.makeText(EmailPasswordActivity.this, "Please verify your email account first!",
                                         Toast.LENGTH_LONG).show();
                             }
@@ -164,12 +168,11 @@ public class EmailPasswordActivity extends BaseActivity implements
                         if (!task.isSuccessful()) {
                             try {
                                 throw task.getException();
-                            } catch (FirebaseAuthInvalidUserException ex){
+                            } catch (FirebaseAuthInvalidUserException ex) {
                                 mStatusTextView.setText("Please register first.");
-                            } catch (FirebaseAuthInvalidCredentialsException ex){
+                            } catch (FirebaseAuthInvalidCredentialsException ex) {
                                 mStatusTextView.setText("Invalid Credentials");
-                            }
-                            catch(Exception e) {
+                            } catch (Exception e) {
                                 Log.e(TAG, e.getMessage());
                             }
                             //mStatusTextView.setText("Authentication failed");
@@ -264,6 +267,8 @@ public class EmailPasswordActivity extends BaseActivity implements
             mStatusTextView.setText("Verified");
             mDetailTextView.setText("UID");
 
+            loginManager.setLogin(true);
+
             findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
             //findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
             //findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
@@ -290,8 +295,7 @@ public class EmailPasswordActivity extends BaseActivity implements
             signOut();
         } else if (i == R.id.verifyEmailButton) {
             sendEmailVerification();
-        }
-        else if (i == R.id.forgot_password) {
+        } else if (i == R.id.forgot_password) {
             //FirebaseAuth auth = FirebaseAuth.getInstance();
             //String emailAddress = "papagora@eurecom.fr";
 

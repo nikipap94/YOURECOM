@@ -3,6 +3,9 @@
     <color name="colorPrimary">#3fa4e1</color>
     <color name="colorPrimaryDark">#2c92d0</color>
     <color name="colorAccent">#cccccc</color>
+    <color name="colorTextPrimary">#000000</color>
+    <color name="colorTextSec">#cccccc</color>
+    <color name="fab">#ff3300</color>
 
     <color name="grey_100">#F5F5F5</color>
     <color name="grey_300">#E0E0E0</color>

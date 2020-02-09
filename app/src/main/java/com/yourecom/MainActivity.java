@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<Course> data = new ArrayList<>();
                 for(DataSnapshot customList :  dataSnapshot.getChildren()){
                     Course item = customList.getValue(Course.class);
+                    System.out.println("key"+ customList.getKey());
                     item.setKey(customList.getKey());
                     data.add(item);
                 }

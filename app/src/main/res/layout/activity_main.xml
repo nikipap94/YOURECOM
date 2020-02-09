@@ -31,7 +31,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="40dp"
-        android:tint="@android:color/white"
+        android:tint="#ffffff"
+        android:backgroundTint="@color/fab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@android:drawable/ic_input_add" />

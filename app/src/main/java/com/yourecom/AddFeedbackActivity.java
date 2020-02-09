@@ -1,9 +1,11 @@
 package com.yourecom;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RatingBar;
@@ -31,6 +33,9 @@ public class AddFeedbackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_feedback);
 
+        getSupportActionBar().setTitle("Add Feedback");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         Intent intent = getIntent();
         this.courseKey = intent.getStringExtra("courseKey");
         String courseTitle = intent.getStringExtra("courseTitle");
@@ -39,6 +44,17 @@ public class AddFeedbackActivity extends AppCompatActivity {
 
         Button btn = (Button) findViewById(R.id.btnSubmit);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.homeAsUp:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void updateCourseRating(final Integer ratingValue){

@@ -61,7 +61,7 @@ public class FeedbackFragment extends Fragment {
         return rootView;
     }
     public FirebaseListAdapter getFeedbackAdapter() {
-        Query query = feedbackRef.orderByChild("courseId").endAt(this.courseId, "courseId");
+        Query query = feedbackRef.orderByChild("courseId").equalTo(courseId);
 
         FirebaseListOptions<Feedback> options = new FirebaseListOptions.Builder<Feedback>()
                 .setLayout(R.layout.fragment_feedback_list)
@@ -91,7 +91,7 @@ public class FeedbackFragment extends Fragment {
     }
 
     public FirebaseListAdapter getTipAdapter() {
-        Query query = tipRef.orderByKey();
+        Query query = tipRef.orderByChild("courseId").equalTo(courseId);
 
         FirebaseListOptions<Tip> options = new FirebaseListOptions.Builder<Tip>()
                 .setLayout(R.layout.fragment_tip_list)

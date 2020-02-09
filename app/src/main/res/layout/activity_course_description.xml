@@ -1,91 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CourseDescriptionActivity">
 
-
-    <TextView
-        android:id="@+id/courseName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/text_margin"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
-
-    <TextView
-        android:id="@+id/st_prof"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/text_margin"
-        android:text="Professor: "
-        app:layout_constraintTop_toBottomOf="@+id/courseName"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/professorName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="profName"
-        app:layout_constraintStart_toEndOf="@+id/st_prof"
-        app:layout_constraintTop_toBottomOf="@+id/courseName" />
-
-    <!--        style="?android:attr/ratingBarStyleIndicator"-->
-
-    <RatingBar
-        android:id="@+id/rating_course"
-        android:layout_width="242dp"
-        android:layout_height="43dp"
-        android:background="#00000000"
-        android:isIndicator="true"
-        android:rating="4"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        android:theme="@style/RatingBar"
-        android:transformPivotX="200dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/professorName"
-        tools:layout_editor_absoluteX="3dp">
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/sliding_tabs"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="32dp"
-            app:tabMode="scrollable" />
-
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/CD_Viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.viewpager.widget.ViewPager>
-    </LinearLayout>
-
+    <include layout="@layout/content_desc" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
+        android:layout_gravity="end|bottom"
+        android:layout_marginRight="40dp"
         android:layout_marginBottom="40dp"
-        android:tint="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:backgroundTint="@color/fab"
+        android:tint="#ffffff"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

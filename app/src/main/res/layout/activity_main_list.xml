@@ -1,22 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_feed"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="#fff"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="1dp">
+
+    <RelativeLayout
+        android:id="@+id/lnr_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="10dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:id="@+id/img_txtdrawable"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img_txtdrawable"
+            android:orientation="vertical"
+            android:paddingLeft="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/course_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:text="Title"
+                    android:textAppearance="@style/CustomTitle" />
+
+            </RelativeLayout>
+
+            <!--                attributes-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prof"
+                        android:textAppearance="@style/SmallText.Title" />
+
+                    <TextView
+                        android:id="@+id/prof_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Adlen"
+                        android:textAppearance="@style/SmallText" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Rating"
+                        android:textAppearance="@style/SmallText.Title" />
+
+                    <!--                   style="?android:attr/ratingBarStyleSmall"   -->
+                    <RatingBar
+                        android:id="@+id/rating_courses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#00000000"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:rating="0"
+                        android:theme="@style/RatingBar.Small" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+    <!--
+    <TextView
+    android:id="@+id/course_title"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:textColor="@android:color/black" />
 
     <TextView
-        android:id="@+id/course_title"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:textColor="@android:color/black" />
-
-    <TextView
-        android:id="@+id/prof_name"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="@dimen/activity_horizontal_margin"
-        android:textColor="#8A8787" />
-</LinearLayout>
+    android:id="@+id/prof_name"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:padding="@dimen/activity_horizontal_margin"
+    android:textColor="#8A8787" />-->

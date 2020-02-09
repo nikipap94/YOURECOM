@@ -1,11 +1,13 @@
 package com.yourecom;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,27 +25,25 @@ import com.yourecom.utils.MyPagerAdapter;
 
 public class CourseDescriptionActivity extends AppCompatActivity {
 
+    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    private final DatabaseReference courseRef = firebaseDatabase.getReference(Course.DB_NAME);
     ViewPager vp;
     TabLayout tabLayout;
     String course;
     String courseKey;
     RatingBar ratingBar;
 
-    private final FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    private final DatabaseReference courseRef = firebaseDatabase.getReference(Course.DB_NAME);
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_description);
 
+        getSupportActionBar().setTitle("Description");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         setDescription();
         ratingBar = (RatingBar) findViewById(R.id.rating_course);
         getCourseRating();
-
-
-
 
 
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,7 +57,7 @@ public class CourseDescriptionActivity extends AppCompatActivity {
                 int position = tabLayout.getSelectedTabPosition();
                 Intent intent;
 
-                switch(position) {
+                switch (position) {
                     case 0:
                         // feedback tab is selected
                         intent = new Intent(CourseDescriptionActivity.this, AddFeedbackActivity.class);
@@ -79,18 +79,29 @@ public class CourseDescriptionActivity extends AppCompatActivity {
         });
 
         //VIEWPAGER
-        vp= (ViewPager) findViewById(R.id.CD_Viewpager);
+        vp = (ViewPager) findViewById(R.id.CD_Viewpager);
         this.addPages();
 
         //TABLAYOUT
-        tabLayout= (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         tabLayout.setupWithViewPager(vp);
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 //        tabLayout.setOnTabSelectedListener(this);
     }
 
-    private void setDescription(){
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.homeAsUp:
+                onBackPressed();
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setDescription() {
         Intent intent = getIntent();
         String title = intent.getStringExtra("course_title");
         String acr = intent.getStringExtra("course_acronym");
@@ -109,7 +120,7 @@ public class CourseDescriptionActivity extends AppCompatActivity {
     }
 
     private void addPages() {
-        MyPagerAdapter pagerAdapter=new MyPagerAdapter(this.getSupportFragmentManager());
+        MyPagerAdapter pagerAdapter = new MyPagerAdapter(this.getSupportFragmentManager());
         pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.FEEDBACK, this.courseKey));
         pagerAdapter.addFragment(new FeedbackFragment(FeedbackFragment.TIPS, this.courseKey));
 
@@ -118,7 +129,7 @@ public class CourseDescriptionActivity extends AppCompatActivity {
 
     }
 
-    private void getCourseRating(){
+    private void getCourseRating() {
         ValueEventListener listener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -134,7 +145,6 @@ public class CourseDescriptionActivity extends AppCompatActivity {
         courseRef.child(courseKey).addValueEventListener(listener);
 
     }
-
 
 
 }

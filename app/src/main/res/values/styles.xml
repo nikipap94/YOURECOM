@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-<!--        <item name="android:windowBackground">@drawable/gradient</item>-->
+        <!--        <item name="android:windowBackground">@drawable/gradient</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -35,7 +35,7 @@
     </style>
 
     <!-- Light EditTexts -->
-    <style name="ThemeOverlay.MyLightEditText" parent="ThemeOverlay.AppCompat.Dark"/>
+    <style name="ThemeOverlay.MyLightEditText" parent="ThemeOverlay.AppCompat.Dark" />
 
     <style name="ThemeOverlay.MyTextDetail" parent="AppTheme">
         <item name="android:layout_width">wrap_content</item>
@@ -57,6 +57,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">36sp</item>
     </style>
+
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@color/rateNormal</item>
         <item name="colorControlActivated">@color/rateActive</item>
@@ -73,4 +74,30 @@
 
     </style>
 
+    <style name="SmallText">
+        <item name="android:textColor">@color/colorTextPrimary</item>
+        <item name="android:textSize">@dimen/fnt_sm</item>
+
+    </style>
+
+    <style name="SmallText.Title">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+
+    </style>
+
+    <style name="CustomTitle">
+        <item name="android:textSize">@dimen/fnt_ttl</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+
+    </style>
+    <style name="FullWidthEdit">
+        <item name="android:padding">20dp</item>
+        <item name="android:background">@null</item>
+        <item name="android:textSize">@dimen/abc_text_size_subhead_material</item>
+
+    </style>
+
+    <dimen name="fnt_sm">11sp</dimen>
+    <dimen name="fnt_ttl">13sp</dimen>
 </resources>
