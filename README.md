@@ -3,7 +3,7 @@ Java based android application for rating classes and professors, connected to F
 Developped in the context of a challenge project for Master students of Eurecom. 
 
 # Credits
-Niki PAPAGORA
-Silvana BARBOZA
-Alba CHACON
-Baya DHOUIB
+Niki PAPAGORA<br/>
+Silvana BARBOZA<br/>
+Alba CHACON<br/>
+Baya DHOUIB<br/>
